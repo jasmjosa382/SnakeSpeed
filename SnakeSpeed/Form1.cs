@@ -15,10 +15,14 @@ namespace SnakeSpeed
 {
     public partial class Form1 : Form
     {
+        Rectangle player = new Rectangle(230, 170, 15, 15);
         Rectangle obstacle1 = new Rectangle(130, 80, 200, 25);
         Rectangle obstacle2 = new Rectangle(240, 320, 200, 25);
         Rectangle ball = new Rectangle(70, 195, 95, 95);
+        //Rectangle point = new Rectangle(200, 195, 10, 10);
 
+        List<Rectangle> points = new List<Rectangle>();
+        List<String> pointColours = new List<string>();
 
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush limeBrush = new SolidBrush(Color.LimeGreen);
@@ -35,9 +39,15 @@ namespace SnakeSpeed
         bool leftDown = false;
         bool rightDown = false;
 
-        int score = 0;
-        int playerSpeed = 3; 
+        int playerScore = 0;
+        int playerSpeed = 3;
 
+        int pointSize = 10;
+
+        string gameState = "waiting";
+
+        Random randGen = new Random();
+        int randValue = 0;
 
         public Form1()
         {
@@ -71,6 +81,18 @@ namespace SnakeSpeed
                     break;
                 case Keys.Right:
                     rightDown = true;
+                    break;
+                case Keys.Space:
+                    if (gameState == "waiting" || gameState == "over")
+                    {
+                        //GameSetup();
+                    }
+                    break;
+                case Keys.Escape:
+                    if (gameState == "waiting" || gameState == "over")
+                    {
+                        this.Close();
+                    }
                     break;
             }
 
@@ -109,10 +131,62 @@ namespace SnakeSpeed
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            //draw player
+            e.Graphics.FillRectangle(cyanBrush, player);
+
+            //draw obstacles
             e.Graphics.FillRectangle(redBrush, obstacle1);
             e.Graphics.FillRectangle(redBrush, obstacle2);
             e.Graphics.FillEllipse(limeBrush, ball);
+            //    e.Graphics.FillEllipse(yellowBrush, point);
+
+            //draw points
+            for (int i = 0; i < points.Count(); i++)
+            {
+                if (pointColours[i] == "yellow")
+                {
+                    e.Graphics.FillEllipse(yellowBrush, points[i]);
+                }
+
+
+            }
+        }
+
+
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+            //move player
+            if (upArrowDown == true && player.Y > 45)
+            {
+                player.Y -= playerSpeed;
+            }
+
+            if (downArrowDown == true && player.Y < 345)
+            {
+                player.Y += playerSpeed;
+            }
+            if (rightDown == true && player.X < 375)
+            {
+                player.X += playerSpeed;
+            }
+            if (leftDown == true && player.X > 55)
+            {
+                player.X -= playerSpeed;
+            }
+
+            //generate a random value
+            randValue = randGen.Next(1, 101);
+
+            //generate new ball if it is time
+            if (randValue < 3)
+            {
+                points.Add(new Rectangle(randGen.Next(0, this.Width - pointSize), 0, pointSize, pointSize));
+                pointColours.Add("yellow");
+            }
+
+
 
         }
-    }
+    }   
 }
+

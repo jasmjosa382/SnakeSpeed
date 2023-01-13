@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.scoreLabel = new System.Windows.Forms.Label();
+            this.playerScoreLabel = new System.Windows.Forms.Label();
+            this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -41,17 +43,23 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
-            // scoreLabel
+            // playerScoreLabel
             // 
-            this.scoreLabel.BackColor = System.Drawing.Color.Transparent;
-            this.scoreLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.scoreLabel.ForeColor = System.Drawing.Color.White;
-            this.scoreLabel.Location = new System.Drawing.Point(129, 78);
-            this.scoreLabel.Name = "scoreLabel";
-            this.scoreLabel.Size = new System.Drawing.Size(186, 28);
-            this.scoreLabel.TabIndex = 1;
-            this.scoreLabel.Text = "Hello";
-            this.scoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.playerScoreLabel.BackColor = System.Drawing.Color.Transparent;
+            this.playerScoreLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerScoreLabel.ForeColor = System.Drawing.Color.White;
+            this.playerScoreLabel.Location = new System.Drawing.Point(129, 78);
+            this.playerScoreLabel.Name = "playerScoreLabel";
+            this.playerScoreLabel.Size = new System.Drawing.Size(186, 28);
+            this.playerScoreLabel.TabIndex = 1;
+            this.playerScoreLabel.Text = "Hello";
+            this.playerScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // gameTimer
+            // 
+            this.gameTimer.Enabled = true;
+            this.gameTimer.Interval = 20;
+            this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
             // Form1
             // 
@@ -59,7 +67,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(412, 418);
-            this.Controls.Add(this.scoreLabel);
+            this.Controls.Add(this.playerScoreLabel);
             this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.Name = "Form1";
@@ -75,7 +83,8 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label scoreLabel;
+        private System.Windows.Forms.Label playerScoreLabel;
+        private System.Windows.Forms.Timer gameTimer;
     }
 }
 
