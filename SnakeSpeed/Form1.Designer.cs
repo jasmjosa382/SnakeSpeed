@@ -52,7 +52,7 @@
             this.playerScoreLabel.Name = "playerScoreLabel";
             this.playerScoreLabel.Size = new System.Drawing.Size(186, 28);
             this.playerScoreLabel.TabIndex = 1;
-            this.playerScoreLabel.Text = "Hello";
+            this.playerScoreLabel.Text = "Score: ";
             this.playerScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gameTimer

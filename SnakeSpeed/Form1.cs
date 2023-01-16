@@ -23,19 +23,16 @@ namespace SnakeSpeed
 
         List<Rectangle> points = new List<Rectangle>();
         List<String> pointColours = new List<string>();
+        List<int> pointSpeeds = new List<int>();
 
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush limeBrush = new SolidBrush(Color.LimeGreen);
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
         SolidBrush cyanBrush = new SolidBrush(Color.Cyan);
 
-        bool wDown = false;
-        bool sDown = false;
+
         bool upArrowDown = false;
         bool downArrowDown = false;
-
-        bool aDown = false;
-        bool dDown = false;
         bool leftDown = false;
         bool rightDown = false;
 
@@ -58,23 +55,12 @@ namespace SnakeSpeed
         {
             switch (e.KeyCode)
             {
-                case Keys.W:
-                    wDown = true;
-                    break;
-                case Keys.S:
-                    sDown = true;
-                    break;
+
                 case Keys.Up:
                     upArrowDown = true;
                     break;
                 case Keys.Down:
                     downArrowDown = true;
-                    break;
-                case Keys.A:
-                    aDown = true;
-                    break;
-                case Keys.D:
-                    dDown = true;
                     break;
                 case Keys.Left:
                     leftDown = true;
@@ -102,23 +88,11 @@ namespace SnakeSpeed
         {
             switch (e.KeyCode)
             {
-                case Keys.W:
-                    wDown = false;
-                    break;
-                case Keys.S:
-                    sDown = false;
-                    break;
                 case Keys.Up:
                     upArrowDown = false;
                     break;
                 case Keys.Down:
                     downArrowDown = false;
-                    break;
-                case Keys.A:
-                    aDown = false;
-                    break;
-                case Keys.D:
-                    dDown = false;
                     break;
                 case Keys.Left:
                     leftDown = false;
@@ -138,16 +112,11 @@ namespace SnakeSpeed
             e.Graphics.FillRectangle(redBrush, obstacle1);
             e.Graphics.FillRectangle(redBrush, obstacle2);
             e.Graphics.FillEllipse(limeBrush, ball);
-            //    e.Graphics.FillEllipse(yellowBrush, point);
 
             //draw points
             for (int i = 0; i < points.Count(); i++)
             {
-                if (pointColours[i] == "yellow")
-                {
-                    e.Graphics.FillEllipse(yellowBrush, points[i]);
-                }
-
+                e.Graphics.FillEllipse(yellowBrush, points[i]);
 
             }
         }
@@ -156,20 +125,20 @@ namespace SnakeSpeed
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             //move player
-            if (upArrowDown == true && player.Y > 45)
+            if (upArrowDown == true && player.Y > 0)
             {
                 player.Y -= playerSpeed;
             }
 
-            if (downArrowDown == true && player.Y < 345)
+            if (downArrowDown == true && player.Y < 400)
             {
                 player.Y += playerSpeed;
             }
-            if (rightDown == true && player.X < 375)
+            if (rightDown == true && player.X < 395)
             {
                 player.X += playerSpeed;
             }
-            if (leftDown == true && player.X > 55)
+            if (leftDown == true && player.X > 2)
             {
                 player.X -= playerSpeed;
             }
@@ -177,16 +146,39 @@ namespace SnakeSpeed
             //generate a random value
             randValue = randGen.Next(1, 101);
 
-            //generate new ball if it is time
+            //generate new point if it is time
             if (randValue < 3)
             {
-                points.Add(new Rectangle(randGen.Next(0, this.Width - pointSize), 0, pointSize, pointSize));
-                pointColours.Add("yellow");
+                points.Add(new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize));
+                pointSpeeds.Add(10);
             }
 
+            //check for collision between player and obstacles
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (player.IntersectsWith(points[i]))
+                {
+                    playerScore++;
+                    playerScoreLabel.Text = $"Score: {playerScore}";
 
+                    points.RemoveAt(i);
+                    pointSpeeds.RemoveAt(i);
+                }
+            }
+
+            //remove points if it they go off screen
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (points[i].Y >= this.Height)
+                {
+                    points.RemoveAt(i);
+                    pointSpeeds.RemoveAt(i);
+                }
+            }
+
+            Refresh();
 
         }
-    }   
+    }
 }
 
