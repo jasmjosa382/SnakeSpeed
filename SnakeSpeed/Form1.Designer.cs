@@ -29,19 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label1 = new System.Windows.Forms.Label();
             this.playerScoreLabel = new System.Windows.Forms.Label();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.titleLabel = new System.Windows.Forms.Label();
+            this.subtitleLabel = new System.Windows.Forms.Label();
+            this.subtitle2Label = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
             // 
             // playerScoreLabel
             // 
@@ -61,14 +54,49 @@
             this.gameTimer.Interval = 20;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
+            // titleLabel
+            // 
+            this.titleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.titleLabel.Font = new System.Drawing.Font("Lucida Console", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.ForeColor = System.Drawing.Color.Yellow;
+            this.titleLabel.Location = new System.Drawing.Point(101, 78);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(226, 28);
+            this.titleLabel.TabIndex = 2;
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // subtitleLabel
+            // 
+            this.subtitleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.subtitleLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subtitleLabel.ForeColor = System.Drawing.Color.White;
+            this.subtitleLabel.Location = new System.Drawing.Point(55, 127);
+            this.subtitleLabel.Name = "subtitleLabel";
+            this.subtitleLabel.Size = new System.Drawing.Size(310, 64);
+            this.subtitleLabel.TabIndex = 3;
+            this.subtitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // subtitle2Label
+            // 
+            this.subtitle2Label.BackColor = System.Drawing.Color.Transparent;
+            this.subtitle2Label.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subtitle2Label.ForeColor = System.Drawing.Color.White;
+            this.subtitle2Label.Location = new System.Drawing.Point(34, 220);
+            this.subtitle2Label.Name = "subtitle2Label";
+            this.subtitle2Label.Size = new System.Drawing.Size(354, 64);
+            this.subtitle2Label.TabIndex = 4;
+            this.subtitle2Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(412, 418);
+            this.ClientSize = new System.Drawing.Size(412, 389);
+            this.Controls.Add(this.subtitle2Label);
+            this.Controls.Add(this.subtitleLabel);
+            this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.playerScoreLabel);
-            this.Controls.Add(this.label1);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Snake Speed";
@@ -76,15 +104,15 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label playerScoreLabel;
         private System.Windows.Forms.Timer gameTimer;
+        private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Label subtitleLabel;
+        private System.Windows.Forms.Label subtitle2Label;
     }
 }
 

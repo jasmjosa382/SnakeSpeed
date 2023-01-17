@@ -19,7 +19,6 @@ namespace SnakeSpeed
         Rectangle obstacle1 = new Rectangle(130, 80, 200, 25);
         Rectangle obstacle2 = new Rectangle(240, 320, 200, 25);
         Rectangle ball = new Rectangle(70, 195, 95, 95);
-        //Rectangle point = new Rectangle(200, 195, 10, 10);
 
         List<Rectangle> points = new List<Rectangle>();
         List<String> pointColours = new List<string>();
@@ -51,6 +50,24 @@ namespace SnakeSpeed
             InitializeComponent();
         }
 
+        public void GameSetup()
+        {
+            gameState = "running";
+
+            titleLabel.Visible = false;
+            titleLabel.Text = "";
+            subtitleLabel.Text = "";
+            subtitle2Label.Text = "";
+
+            gameTimer.Enabled = true;
+            playerScore = 0;
+            player.X = 230;
+
+            points.Clear();
+            pointSpeeds.Clear();
+            pointColours.Clear();
+        }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -71,7 +88,7 @@ namespace SnakeSpeed
                 case Keys.Space:
                     if (gameState == "waiting" || gameState == "over")
                     {
-                        //GameSetup();
+                        GameSetup();
                     }
                     break;
                 case Keys.Escape:
@@ -103,25 +120,6 @@ namespace SnakeSpeed
             }
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            //draw player
-            e.Graphics.FillRectangle(cyanBrush, player);
-
-            //draw obstacles
-            e.Graphics.FillRectangle(redBrush, obstacle1);
-            e.Graphics.FillRectangle(redBrush, obstacle2);
-            e.Graphics.FillEllipse(limeBrush, ball);
-
-            //draw points
-            for (int i = 0; i < points.Count(); i++)
-            {
-                e.Graphics.FillEllipse(yellowBrush, points[i]);
-
-            }
-        }
-
-
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             //move player
@@ -130,7 +128,7 @@ namespace SnakeSpeed
                 player.Y -= playerSpeed;
             }
 
-            if (downArrowDown == true && player.Y < 400)
+            if (downArrowDown == true && player.Y < 372)
             {
                 player.Y += playerSpeed;
             }
@@ -158,6 +156,8 @@ namespace SnakeSpeed
             {
                 if (player.IntersectsWith(points[i]))
                 {
+                    playerSpeed++;
+
                     playerScore++;
                     playerScoreLabel.Text = $"Score: {playerScore}";
 
@@ -176,9 +176,70 @@ namespace SnakeSpeed
                 }
             }
 
+            //player intersects with obstacles
+            if (player.IntersectsWith(obstacle1))
+            {
+                gameTimer.Enabled = false;
+                gameState = "over";
+
+            }
+            else if (player.IntersectsWith(obstacle2))
+            {
+                gameTimer.Enabled = false;
+                gameState = "over";
+            }
+            else if (player.IntersectsWith(ball))
+            {
+                gameTimer.Enabled = false;
+                gameState = "over";
+            }
+
+
+
             Refresh();
 
         }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            if (gameState == "waiting")
+            {
+                titleLabel.Text = "Snake Speed";
+                subtitleLabel.Text = "Avoid all obstacles and walls and reach a new high speed!";
+                subtitle2Label.Text = "Press Space to play or Esc to exit";
+            }
+            else if (gameState == "running")
+            {
+                // update labels
+                playerScoreLabel.Text = $"Score: {playerScore}";
+
+                //draw player
+                e.Graphics.FillRectangle(cyanBrush, player);
+
+                //draw obstacles
+                e.Graphics.FillRectangle(redBrush, obstacle1);
+                e.Graphics.FillRectangle(redBrush, obstacle2);
+                e.Graphics.FillEllipse(limeBrush, ball);
+
+                //draw points
+                for (int i = 0; i < points.Count(); i++)
+                {
+                    e.Graphics.FillEllipse(yellowBrush, points[i]);
+
+                }
+            }
+            else if (gameState == "over")
+            {
+                playerScoreLabel.Text = "";
+
+                titleLabel.Visible = true;
+
+                titleLabel.Text = "Game Over";
+                subtitleLabel.Text = $"High Speed: {playerScore}";
+                subtitle2Label.Text = "Press Space to Start or Esc to Exit";
+            }
+        }
+
     }
 }
 
