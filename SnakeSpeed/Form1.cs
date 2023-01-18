@@ -15,7 +15,7 @@ namespace SnakeSpeed
 {
     public partial class Form1 : Form
     {
-        Rectangle player = new Rectangle(230, 170, 15, 15);
+        Rectangle player = new Rectangle(230, 170, 20, 20);
         Rectangle obstacle1 = new Rectangle(130, 80, 200, 25);
         Rectangle obstacle2 = new Rectangle(240, 320, 200, 25);
         Rectangle ball = new Rectangle(70, 195, 95, 95);
@@ -36,7 +36,7 @@ namespace SnakeSpeed
         bool rightDown = false;
 
         int playerScore = 0;
-        int playerSpeed = 3;
+        int playerSpeed = 5;
 
         int pointSize = 10;
 
@@ -44,6 +44,8 @@ namespace SnakeSpeed
 
         Random randGen = new Random();
         int randValue = 0;
+
+        int x, y;
 
         public Form1()
         {
@@ -61,7 +63,9 @@ namespace SnakeSpeed
 
             gameTimer.Enabled = true;
             playerScore = 0;
+            playerSpeed = 5;
             player.X = 230;
+            player.Y = 170;
 
             points.Clear();
             pointSpeeds.Clear();
@@ -150,6 +154,11 @@ namespace SnakeSpeed
                 points.Add(new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize));
                 pointSpeeds.Add(10);
             }
+            else if (randValue < 8)
+            {
+                points.Add(new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize));
+                pointSpeeds.Add(8);
+            }
 
             //check for collision between player and obstacles
             for (int i = 0; i < points.Count; i++)
@@ -194,6 +203,15 @@ namespace SnakeSpeed
                 gameState = "over";
             }
 
+            //points interact with obstacles
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (points[i].X == obstacle1.X) 
+                {
+                   randGen.Next(x, y);
+                //  randGen.Next(0, this.Height - pointSize), pointSize, pointSize)
+                }
+            }
 
 
             Refresh();
