@@ -22,7 +22,6 @@ namespace SnakeSpeed
 
         List<Rectangle> points = new List<Rectangle>();
         List<String> pointColours = new List<string>();
-        List<int> pointSpeeds = new List<int>();
 
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush limeBrush = new SolidBrush(Color.LimeGreen);
@@ -45,8 +44,6 @@ namespace SnakeSpeed
         Random randGen = new Random();
         int randValue = 0;
 
-        int x, y;
-
         public Form1()
         {
             InitializeComponent();
@@ -68,7 +65,6 @@ namespace SnakeSpeed
             player.Y = 170;
 
             points.Clear();
-            pointSpeeds.Clear();
             pointColours.Clear();
         }
 
@@ -149,15 +145,19 @@ namespace SnakeSpeed
             randValue = randGen.Next(1, 101);
 
             //generate new point if it is time
-            if (randValue < 3)
+            if (randValue < 5)
             {
-                points.Add(new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize));
-                pointSpeeds.Add(10);
-            }
-            else if (randValue < 8)
-            {
-                points.Add(new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize));
-                pointSpeeds.Add(8);
+                Rectangle newPoint = new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize);
+
+                //points interact with obstacles
+
+                while (newPoint.IntersectsWith(obstacle1) || newPoint.IntersectsWith(obstacle2) || newPoint.IntersectsWith(obstacle2) ||  newPoint.IntersectsWith(ball))
+                {
+                    newPoint = new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize);
+
+                }
+
+                points.Add(newPoint);
             }
 
             //check for collision between player and obstacles
@@ -171,7 +171,6 @@ namespace SnakeSpeed
                     playerScoreLabel.Text = $"Score: {playerScore}";
 
                     points.RemoveAt(i);
-                    pointSpeeds.RemoveAt(i);
                 }
             }
 
@@ -181,37 +180,17 @@ namespace SnakeSpeed
                 if (points[i].Y >= this.Height)
                 {
                     points.RemoveAt(i);
-                    pointSpeeds.RemoveAt(i);
                 }
             }
 
             //player intersects with obstacles
-            if (player.IntersectsWith(obstacle1))
+            if (player.IntersectsWith(obstacle1) || player.IntersectsWith(obstacle2) || player.IntersectsWith(ball))
             {
                 gameTimer.Enabled = false;
                 gameState = "over";
 
             }
-            else if (player.IntersectsWith(obstacle2))
-            {
-                gameTimer.Enabled = false;
-                gameState = "over";
-            }
-            else if (player.IntersectsWith(ball))
-            {
-                gameTimer.Enabled = false;
-                gameState = "over";
-            }
 
-            //points interact with obstacles
-            for (int i = 0; i < points.Count; i++)
-            {
-                if (points[i].X == obstacle1.X) 
-                {
-                   randGen.Next(x, y);
-                //  randGen.Next(0, this.Height - pointSize), pointSize, pointSize)
-                }
-            }
 
 
             Refresh();
