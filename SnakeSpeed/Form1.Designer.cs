@@ -41,12 +41,13 @@
             this.playerScoreLabel.BackColor = System.Drawing.Color.Transparent;
             this.playerScoreLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerScoreLabel.ForeColor = System.Drawing.Color.White;
-            this.playerScoreLabel.Location = new System.Drawing.Point(129, 78);
+            this.playerScoreLabel.Location = new System.Drawing.Point(214, 320);
             this.playerScoreLabel.Name = "playerScoreLabel";
             this.playerScoreLabel.Size = new System.Drawing.Size(186, 28);
             this.playerScoreLabel.TabIndex = 1;
             this.playerScoreLabel.Text = "Score: ";
             this.playerScoreLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.playerScoreLabel.Visible = false;
             // 
             // gameTimer
             // 
@@ -59,7 +60,7 @@
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
             this.titleLabel.Font = new System.Drawing.Font("Lucida Console", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.ForeColor = System.Drawing.Color.Yellow;
-            this.titleLabel.Location = new System.Drawing.Point(101, 78);
+            this.titleLabel.Location = new System.Drawing.Point(106, 99);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(226, 28);
             this.titleLabel.TabIndex = 2;

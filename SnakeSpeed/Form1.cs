@@ -15,7 +15,7 @@ namespace SnakeSpeed
 {
     public partial class Form1 : Form
     {
-        Rectangle player = new Rectangle(230, 170, 20, 20);
+        Rectangle player = new Rectangle(230, 170, 21, 21);
         Rectangle obstacle1 = new Rectangle(130, 80, 200, 25);
         Rectangle obstacle2 = new Rectangle(240, 320, 200, 25);
         Rectangle ball = new Rectangle(70, 195, 95, 95);
@@ -37,6 +37,8 @@ namespace SnakeSpeed
         int playerScore = 0;
         int playerSpeed = 5;
 
+        int obstacleXSpeed = 3;
+
         int pointSize = 10;
 
         string gameState = "waiting";
@@ -54,6 +56,7 @@ namespace SnakeSpeed
             gameState = "running";
 
             titleLabel.Visible = false;
+            playerScoreLabel.Visible = true;
             titleLabel.Text = "";
             subtitleLabel.Text = "";
             subtitle2Label.Text = "";
@@ -122,17 +125,20 @@ namespace SnakeSpeed
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            //move obstacle 1
+            obstacle1.X += obstacleXSpeed;
+
             //move player
             if (upArrowDown == true && player.Y > 0)
             {
                 player.Y -= playerSpeed;
             }
 
-            if (downArrowDown == true && player.Y < 372)
+            if (downArrowDown == true && player.Y < 366)
             {
                 player.Y += playerSpeed;
             }
-            if (rightDown == true && player.X < 395)
+            if (rightDown == true && player.X < 390)
             {
                 player.X += playerSpeed;
             }
@@ -145,13 +151,13 @@ namespace SnakeSpeed
             randValue = randGen.Next(1, 101);
 
             //generate new point if it is time
-            if (randValue < 5)
+            if (randValue < 4)
             {
                 Rectangle newPoint = new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize);
 
                 //points interact with obstacles
 
-                while (newPoint.IntersectsWith(obstacle1) || newPoint.IntersectsWith(obstacle2) || newPoint.IntersectsWith(obstacle2) ||  newPoint.IntersectsWith(ball))
+                while (newPoint.IntersectsWith(obstacle1) || newPoint.IntersectsWith(obstacle2) || newPoint.IntersectsWith(ball))
                 {
                     newPoint = new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize);
 
@@ -160,7 +166,8 @@ namespace SnakeSpeed
                 points.Add(newPoint);
             }
 
-            //check for collision between player and obstacles
+
+            //check for collision between player and points
             for (int i = 0; i < points.Count; i++)
             {
                 if (player.IntersectsWith(points[i]))
@@ -174,14 +181,17 @@ namespace SnakeSpeed
                 }
             }
 
+
             //remove points if it they go off screen
             for (int i = 0; i < points.Count; i++)
             {
                 if (points[i].Y >= this.Height)
                 {
                     points.RemoveAt(i);
+
                 }
             }
+
 
             //player intersects with obstacles
             if (player.IntersectsWith(obstacle1) || player.IntersectsWith(obstacle2) || player.IntersectsWith(ball))
@@ -190,6 +200,13 @@ namespace SnakeSpeed
                 gameState = "over";
 
             }
+
+            //change direction if obstacle 1 hits the wall 
+            if (obstacle1.X < 0 || obstacle1.X > 220)
+            {
+                obstacleXSpeed *= -1;
+            }
+
 
 
 
@@ -237,6 +254,7 @@ namespace SnakeSpeed
             }
         }
 
+   
     }
 }
 
