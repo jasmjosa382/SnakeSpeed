@@ -185,7 +185,7 @@ namespace SnakeSpeed
             //remove points if it they go off screen
             for (int i = 0; i < points.Count; i++)
             {
-                if (points[i].Y >= this.Height)
+                if (points[i].Y >= 370 || points[i].X >= 390)
                 {
                     points.RemoveAt(i);
 
