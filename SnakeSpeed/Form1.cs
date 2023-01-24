@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Media;
 //Snake Speed Game 
 //January 2023
 //Jasmine Josan
@@ -17,8 +17,8 @@ namespace SnakeSpeed
     {
         Rectangle player = new Rectangle(230, 170, 21, 21);
         Rectangle obstacle1 = new Rectangle(130, 80, 200, 25);
-        Rectangle obstacle2 = new Rectangle(240, 320, 200, 25);
-        Rectangle ball = new Rectangle(70, 195, 95, 95);
+        Rectangle obstacle2 = new Rectangle(285, 320, 200, 25);
+        Rectangle ball = new Rectangle(80, 195, 95, 95);
 
         List<Rectangle> points = new List<Rectangle>();
         List<String> pointColours = new List<string>();
@@ -35,7 +35,7 @@ namespace SnakeSpeed
         bool rightDown = false;
 
         int playerScore = 0;
-        int playerSpeed = 5;
+        int playerSpeed = 3;
 
         int obstacleXSpeed = 3;
 
@@ -63,7 +63,7 @@ namespace SnakeSpeed
 
             gameTimer.Enabled = true;
             playerScore = 0;
-            playerSpeed = 5;
+            playerSpeed = 3;
             player.X = 230;
             player.Y = 170;
 
@@ -92,6 +92,8 @@ namespace SnakeSpeed
                     if (gameState == "waiting" || gameState == "over")
                     {
                         GameSetup();
+                        SoundPlayer startGame = new SoundPlayer(Properties.Resources.startGame);
+                        startGame.Play();
                     }
                     break;
                 case Keys.Escape:
@@ -132,19 +134,39 @@ namespace SnakeSpeed
             if (upArrowDown == true && player.Y > 0)
             {
                 player.Y -= playerSpeed;
+
+                if (player.Y < 0)
+                {
+                    player.Y = 0;
+                }
             }
 
-            if (downArrowDown == true && player.Y < 366)
+            if (downArrowDown == true && player.Y < 410)
             {
                 player.Y += playerSpeed;
+              
+                if (player.Y > 410)
+                {
+                    player.Y = 410;
+                }
             }
-            if (rightDown == true && player.X < 390)
+            if (rightDown == true && player.X < 461)
             {
                 player.X += playerSpeed;
+
+                if (player.X > 461)
+                {
+                    player.X = 461;
+                }
             }
             if (leftDown == true && player.X > 2)
             {
                 player.X -= playerSpeed;
+
+                if (player.X < 2)
+                {
+                    player.X = 2;
+                }
             }
 
             //generate a random value
@@ -172,6 +194,9 @@ namespace SnakeSpeed
             {
                 if (player.IntersectsWith(points[i]))
                 {
+                    SoundPlayer pointUp = new SoundPlayer(Properties.Resources.pointUp);
+                    pointUp.Play();
+
                     playerSpeed++;
 
                     playerScore++;
@@ -196,7 +221,11 @@ namespace SnakeSpeed
             //player intersects with obstacles
             if (player.IntersectsWith(obstacle1) || player.IntersectsWith(obstacle2) || player.IntersectsWith(ball))
             {
+                SoundPlayer gameOver = new SoundPlayer(Properties.Resources.gameOver);
+                gameOver.Play();
+
                 gameTimer.Enabled = false;
+
                 gameState = "over";
 
             }
@@ -254,7 +283,6 @@ namespace SnakeSpeed
             }
         }
 
-   
     }
 }
 

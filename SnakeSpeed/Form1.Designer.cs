@@ -41,7 +41,7 @@
             this.playerScoreLabel.BackColor = System.Drawing.Color.Transparent;
             this.playerScoreLabel.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playerScoreLabel.ForeColor = System.Drawing.Color.White;
-            this.playerScoreLabel.Location = new System.Drawing.Point(214, 320);
+            this.playerScoreLabel.Location = new System.Drawing.Point(267, 320);
             this.playerScoreLabel.Name = "playerScoreLabel";
             this.playerScoreLabel.Size = new System.Drawing.Size(186, 28);
             this.playerScoreLabel.TabIndex = 1;
@@ -58,9 +58,9 @@
             // titleLabel
             // 
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.titleLabel.Font = new System.Drawing.Font("Lucida Console", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Font = new System.Drawing.Font("Lucida Console", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.ForeColor = System.Drawing.Color.Yellow;
-            this.titleLabel.Location = new System.Drawing.Point(91, 77);
+            this.titleLabel.Location = new System.Drawing.Point(129, 75);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(226, 28);
             this.titleLabel.TabIndex = 2;
@@ -71,7 +71,7 @@
             this.subtitleLabel.BackColor = System.Drawing.Color.Transparent;
             this.subtitleLabel.Font = new System.Drawing.Font("Lucida Console", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.subtitleLabel.ForeColor = System.Drawing.Color.White;
-            this.subtitleLabel.Location = new System.Drawing.Point(55, 127);
+            this.subtitleLabel.Location = new System.Drawing.Point(89, 138);
             this.subtitleLabel.Name = "subtitleLabel";
             this.subtitleLabel.Size = new System.Drawing.Size(310, 64);
             this.subtitleLabel.TabIndex = 3;
@@ -82,7 +82,7 @@
             this.subtitle2Label.BackColor = System.Drawing.Color.Transparent;
             this.subtitle2Label.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.subtitle2Label.ForeColor = System.Drawing.Color.White;
-            this.subtitle2Label.Location = new System.Drawing.Point(34, 220);
+            this.subtitle2Label.Location = new System.Drawing.Point(67, 256);
             this.subtitle2Label.Name = "subtitle2Label";
             this.subtitle2Label.Size = new System.Drawing.Size(354, 64);
             this.subtitle2Label.TabIndex = 4;
@@ -93,7 +93,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(412, 389);
+            this.ClientSize = new System.Drawing.Size(484, 432);
             this.Controls.Add(this.subtitle2Label);
             this.Controls.Add(this.subtitleLabel);
             this.Controls.Add(this.titleLabel);
