@@ -249,7 +249,7 @@ namespace SnakeSpeed
             if (gameState == "waiting")
             {
                 titleLabel.Text = "Snake Speed";
-                subtitleLabel.Text = "Avoid all obstacles and walls and reach a new high speed!";
+                subtitleLabel.Text = "Avoid the obstacles and reach a new high speed!";
                 subtitle2Label.Text = "Press Space to play or Esc to exit";
             }
             else if (gameState == "running")

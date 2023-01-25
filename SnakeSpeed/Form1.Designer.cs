@@ -58,11 +58,11 @@
             // titleLabel
             // 
             this.titleLabel.BackColor = System.Drawing.Color.Transparent;
-            this.titleLabel.Font = new System.Drawing.Font("Lucida Console", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Font = new System.Drawing.Font("Lucida Console", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLabel.ForeColor = System.Drawing.Color.Yellow;
-            this.titleLabel.Location = new System.Drawing.Point(129, 75);
+            this.titleLabel.Location = new System.Drawing.Point(87, 81);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(226, 28);
+            this.titleLabel.Size = new System.Drawing.Size(299, 57);
             this.titleLabel.TabIndex = 2;
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
