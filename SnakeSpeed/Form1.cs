@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+
 //Snake Speed Game 
 //January 2023
 //Jasmine Josan
@@ -179,7 +180,7 @@ namespace SnakeSpeed
 
                 //points interact with obstacles
 
-                while (newPoint.IntersectsWith(obstacle1) || newPoint.IntersectsWith(obstacle2) || newPoint.IntersectsWith(ball))
+                while (newPoint.IntersectsWith(obstacle2) || newPoint.IntersectsWith(ball))
                 {
                     newPoint = new Rectangle(randGen.Next(0, this.Width - pointSize), randGen.Next(0, this.Height - pointSize), pointSize, pointSize);
 
@@ -210,7 +211,7 @@ namespace SnakeSpeed
             //remove points if it they go off screen
             for (int i = 0; i < points.Count; i++)
             {
-                if (points[i].Y >= 370 || points[i].X >= 390)
+                if (points[i].Y >= 410 || points[i].X >= 455)
                 {
                     points.RemoveAt(i);
 
@@ -231,7 +232,7 @@ namespace SnakeSpeed
             }
 
             //change direction if obstacle 1 hits the wall 
-            if (obstacle1.X < 0 || obstacle1.X > 220)
+            if (obstacle1.X < 0 || obstacle1.X > 280)
             {
                 obstacleXSpeed *= -1;
             }
